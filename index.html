@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneakers</title>
+    <style>
+       
+        body, h1, h2, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            color: #fff;
+            background-color: #B7410E;
+            padding: 20px 0;
+            position: relative; /* positioning context */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1> Sneakers </h1>
+            <!-- Shopping Cart Icon (Emoji) -->
+            <a href="#" class="cart-icon">🛒</a>
+            <!-- Navigation -->
+            <nav>
+                <ul>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Product Details -->
+        <div class="product">
+            <!-- Image -->
+            <img src="https://raw.githubusercontent.com/eungobs/MLab-Hosting/master/desktop-design-removebg-preview.png" alt="Sneaker Image" class="middle-left-image" id="sneaker-image">
+
+
+            <!-- Description -->
+            <div class="product-description">
+                <p><span style="color: orange;">Sneaker Company</span></p>
+                <p><strong>Fall Limited Edition Sneakers</strong></p>
+                <p>These low-profile sneakers are your
+                <p>perfect casual wear companion.
+                <p>Featuring a durable rubber outer sole, 
+                <p>they'll withstand everything the
+                <p>weather can offer.</p>
+                <p>
+                    $125.00
+                    <br>
+                    <del style="color: red;">$250.00</del>
+                </p>
+                <div class="quantity-controls">
+                    <span id="subtract-item" class="clickable">-</span>
+                    <span id="item-count">0</span>
+                    <span id="add-item" class="clickable">+</span>
+                </div>
+                <button id="add-to-cart-btn" style="background-color: orange; color: white;" class="clickable">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Shopping Cart Section -->
+    <div class="shopping-cart">
+        <h2></h2>
+        <!-- cart items to display in a trolley emoji -->
+        <ul id="cart-items"></ul>
+        <button id="checkout-btn">Checkout</button>
+    </div>
+
+
+    <script>
+        var itemCount = 0;
+
+        // Click event listener for the image
+        document.getElementById("sneaker-image").addEventListener("click", function() {
+            var img = document.getElementById("sneaker-image");
+            img.classList.toggle("clicked"); // Toggle the "clicked" class
+        });
+
+        // Click event listener for "Add to Cart" button
+        document.getElementById("add-to-cart-btn").addEventListener("click", function() {
+            var img = document.getElementById("sneaker-image");
+            img.classList.add("clicked"); // Add the "clicked" class to change color
+            itemCount++;
+            updateCart();
+        });
+
+        // Click event listeners for clickable elements
+        document.getElementById("subtract-item").addEventListener("click", function() {
+            if (itemCount > 0) {
+                itemCount--;
+                updateCart();
+            }
+        });
+
+        document.getElementById("add-item").addEventListener("click", function() {
+            itemCount++;
+            updateCart();
+        });
+
+        function updateCart() {
+            document.getElementById("item-count").textContent = itemCount;
+            // Update cart items to display in a trolley emoji
+            document.getElementById("cart-items").innerHTML = "<li>🛒 " + itemCount + " items in cart</li>";
+        }
+    </script>
+</body>
+</html>
