@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sneakers</title>
     <style>
-       
+        /* Reset default browser styles */
         body, h1, h2, ul, li {
             margin: 0;
             padding: 0;
@@ -27,7 +27,7 @@
             color: #fff;
             background-color: #B7410E;
             padding: 20px 0;
-            position: relative; /* positioning context */
+            position: relative; /* Establish as positioning context */
         }
 
         header h1 {
@@ -53,20 +53,111 @@
             text-decoration: none;
         }
 
+        /* Change color on hover */
+        nav ul li a:hover {
+            color: #FFA500; /* Change to desired hover color */
+        }
+
         main {
             padding: 20px 0;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
         }
 
         .product {
             border: 1px solid #ddd;
             padding: 20px;
+            display: flex; /* Set display to flex */
+            align-items: center; /* Align items vertically */
             text-align: center;
         }
 
         .product img {
             max-width: 100%;
             height: auto;
-            margin-bottom: 20px;
+            width: 700px; /*image width as*/
+            transition: filter 0.3s ease; /* Add transition effect */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .product img:hover {
+            filter: brightness(70%); /* Change brightness on hover */
+        }
+
+        .product img.clicked {
+            filter: grayscale(100%); /* Change to grayscale when clicked */
+        }
+
+        .product-description {
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .product-description p {
+            margin-bottom: 10px;
+        }
+
+        .shopping-cart {
+            background-color: #B7410E;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            overflow-y: auto;
+            color: #fff;
+        }
+
+        .shopping-cart h2 {
+            margin-bottom: 10px;
+        }
+
+        #cart-items {
+            list-style: none;
+        }
+
+        #cart-items li {
+            margin-bottom: 10px;
+        }
+
+        #checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+        }
+
+        /* styling for clickable elements */
+        .clickable {
+            cursor: pointer;
+            text-decoration: underline;
+            color: blue;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .quantity-controls span {
+            margin: 0 5px;
         }
     </style>
 </head>
@@ -84,11 +175,11 @@
                     <li><a href="#">Men</a></li>
                     <li><a href="#">Women</a></li>
                     <li><a href="#">Contact</a></li>
+                    <!-- Removed "Cart" navigation item -->
                 </ul>
             </nav>
         </div>
     </header>
-
 
     <!-- Main Content Section -->
     <main>
@@ -97,21 +188,16 @@
             <!-- Image -->
             <img src="https://raw.githubusercontent.com/eungobs/MLab-Hosting/master/desktop-design-removebg-preview.png" alt="Sneaker Image" class="middle-left-image" id="sneaker-image">
 
-
             <!-- Description -->
             <div class="product-description">
                 <p><span style="color: orange;">Sneaker Company</span></p>
                 <p><strong>Fall Limited Edition Sneakers</strong></p>
                 <p>These low-profile sneakers are your
-                <p>perfect casual wear companion.
+                <p>perfect casual wear companion.</p>
                 <p>Featuring a durable rubber outer sole, 
-                <p>they'll withstand everything the
-                <p>weather can offer.</p>
-                <p>
-                    $125.00
-                    <br>
-                    <del style="color: red;">$250.00</del>
-                </p>
+                <p>they'll withstand everything the weather can offer.</p>
+                <p>$125.00</p>
+                <p><del style="color: red;">$250.00</del></p>
                 <div class="quantity-controls">
                     <span id="subtract-item" class="clickable">-</span>
                     <span id="item-count">0</span>
@@ -122,7 +208,6 @@
         </div>
     </main>
 
-
     <!-- Shopping Cart Section -->
     <div class="shopping-cart">
         <h2></h2>
@@ -131,6 +216,10 @@
         <button id="checkout-btn">Checkout</button>
     </div>
 
+    <!-- Next Button -->
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="sneakers.html" style="padding: 10px 20px; background-color: #B7410E; color: #fff; text-decoration: none; border-radius: 5px;">Next</a>
+    </div>
 
     <script>
         var itemCount = 0;
@@ -144,7 +233,7 @@
         // Click event listener for "Add to Cart" button
         document.getElementById("add-to-cart-btn").addEventListener("click", function() {
             var img = document.getElementById("sneaker-image");
-            img.classList.add("clicked"); // Add the "clicked" class to change color
+            img.classList.add("clicked"); // "clicked" class to change color
             itemCount++;
             updateCart();
         });
@@ -164,7 +253,7 @@
 
         function updateCart() {
             document.getElementById("item-count").textContent = itemCount;
-            // Update cart items to display in a trolley emoji
+            // cart items to display in a trolley emoji
             document.getElementById("cart-items").innerHTML = "<li>🛒 " + itemCount + " items in cart</li>";
         }
     </script>
